@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh Virene - Resume</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdowns = document.querySelectorAll('.dropdown');
+        
+        dropdowns.forEach(function(dropdown) {
+            var btn = dropdown.querySelector('.dropbtn');
+            var content = dropdown.querySelector('.dropdown-content');
+
+            btn.addEventListener('click', function() {
+                content.classList.toggle('show');
+            });
+
+            // Close dropdown if clicked outside
+            window.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    content.classList.remove('show');
+                }
+            });
+        });
+    });
+</script>
+<body>
+    <header>
+        <h1>Josh Virene</h1>
+        <p>Applied Economist | Data Scientist</p>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my website, my name is Josh Virene, a recent graduate with a Master's in Applied Economics from the University of California, Davis.
+            This website showcases several of the projects that I have worked on, and showcases the applied work, as well as code that I have employed
+            in languages including R, Python, STATA, and JavaScript.</p>
+        </p>
+    </section>
+
+    <section id="projects_1" class="dropdown">
+        <h2 class="dropbtn">Satellite Imagery Analysis for Wildfire Management</h2>
+        <div class="dropdown-content">
+            <img src="images/fire_fighter.jpg" width="600" height="300">
+            <img src="images/fire_fighter_2.jpg" width="600" height="300">
+            <p>One of my works was done under the NASA DEVELOP program. Working in a team of four, we used aerial and satellite imagery to contribute to the 
+                literature and understanding of remote sensing as a tool for wildfire analysis in Colorado. This was done in the wake of the <a href="https://www.fs.usda.gov/about-agency/features/cameron-peak-fighting-fire-together">Cameron Peak Fire</a>, 
+                one of the most devastating fires in Colorado to date. Increasing frequency and severity of wildfires in the state of Colorado has necessitated improved forest monitoring and management practices. </p>    
+                
+            <p><strong>Objective:</strong>  The overarching goal of this project was to provide a product for our partner agencies- the Colorado State Forest Service (CSFS), 
+            and the Colorado Forest Restoration Institute (CFRI) with a workflow they could use to identify wildfire-prone regions in Colorado.</p>
+
+            <p><strong>Methods:</strong>  In order to achieve this, we developed a thorough and nuanced procedure for canopy classification for forests in Colorado.</p>
+            <p> Important steps in this process included: 
+            <ul>
+                <li> Gathering input imagery sources. We used National Agricultural Imagery Program (NAIP) imagery for our spectral imagery source, as well as Shuttle Radar Topography Mission (SRTM) imagery for topographic data.</li>
+                <li> Developing a classification method. The main method we employed was supervised classification through a random forest (RF) model using Google Earth Engine (GEE), which is written in JavaScript (JS).</li>
+                <li> Exploring means of improving model accuracy. Inherent to machine learning (ML) and random forest (RF) classification is model performance and its sensitivity to variable inputs; 
+                    one of the main components of our analysis was running over thirty model iterations to explore how we could improve our model.</li>
+                <li> We tested factors including image quality, image resolution, number of training points, the predictor variables used, and our method of dealing with shadow pixels.</li>
+                <li> Finally, the analysis was carried out in study regions characterized by different forest types. The first study region, Upper Monument Creek (UMC) is near Colorado Springs and the other study region- BDSR is in Northern Colorado. </li>
+            </ul>
+
+            <p>The full process is detailed as follows:</p>
+            <img src="images/process.png">
+
+            <p><strong>Conclusion:</strong>  Our conclusion section evaluated the efficacy of various approaches that we employed to deliver the best product to our partner agencies.</p>
+            <p> Important conclusions that we reached include: 
+            <ul>
+                <li> In comparing the 2013 (lower quality) to the 2021 (higher quality) NAIP imagery, varying the image quality had a minimal effect on model performance.</li>
+                <img src="images/result1.png">
+                <li> Varying the resolution of the imagery from the most coarse at 3m to the most granular at 1m, had minimal impact on model test accuracy.</li>
+                <img src="images/result5.png">
+                <li> There is a positive correlation between the number of training points and the model accuracy; more training points lead to more accurate classification.</li>
+                <img src="images/result4.png">
+                <li> Employing shadow reclassification methods will yield a better performing model compared to one that does not reclassify Shadow into either Gap or Canopy classes.</li>
+                <img src="images/result3.png">
+                <li> Including topographic variables from the SRTM decreased model performance, suggesting that the topographic data input into the RF model</li>
+            </ul>
+
+            <p><strong>Key Takeaways:</strong> Overall, this project contributes to the body of literature on remote sensing applications in wildfire management and 
+                mitigation. We draw important conclusions within our study on which model variables best optimize the model accuracy drawn from the confusion matrix
+                within the context of our study. Finally, we determined where future work could extend the work accomplished in this study. We recommend the exploration
+                of object-based classification methods, in addition to shadow classification being done in the post-processing stage rather than pre-processing.</p>  
+            
+            <p><strong>NOTE: This work was done in conjunction with the following individuals:</strong></p>
+            <p><strong>Team: Nora Carmody, Lillian Gordon, Nathan Teich Josh Virene</strong></p>
+            <p><strong>Science Advisors: Nick Young, Tony Vorster, Christopher Choi, Catherine Jarnevich</strong></p>
+            <p><strong>Fellow: Sarah Hettema</strong></p>
+            For a more extensive treatment of the research described here, please visit <a href="https://appliedsciences.nasa.gov/what-we-do/projects/evaluating-efficacy-remote-sensing-imagery-monitoring-forest-fuels-treatment"> the NASA DEVELOP website.</a>
+        </div>
+    </section>  
+
+    <section id="projects_2" class="dropdown">
+        <h2 class="dropbtn">Beef Cattle Producer Perspectives on Virtual Fencing</h2>
+        <div class="dropdown-content">
+            <img src="images/vf.jpg" height="600" width="500">
+            <p>Another project that I worked on examines technology diffusion for an emerging global positioning technology in the rural United States. Virtual Fence (VF) technology is a rapidly expanding means of maintaining boundaries
+                for livestock without the need for physical fence. This is achieved using a tower that broadcasts a signal to collars, which give audible and electric cues that serve as an invisible boundary for livestock, namely cattle 
+                in the context of this study.</p>
+            <p><strong>Stage One, Conducting the Interviews:</strong> In this stage, using a document with pre-specified interview questions, I conducted and recorded interviews 
+                with ranchers from Colorado, South Dakota, Montana, Washington, and Utah.</p>
+            <p><strong>Stage Two, Analysis:</strong> The next step was to transcribe the recordings using Google Cloud Platform (GCP). Once transcribed, I conducted 
+                a two-stage coding process to parse out common themes, the pros and cons of the technology, and any concerns that ranchers raised. Going beyond what
+                was described in the paper, I explored other natural language processing (NLP) methods in R and made word clouds for more meta-level analysis.</p>
+            <p><strong>Stage Three, Writing:</strong> Based on the results from the analysis, myself and the other writers drew conclusions that are detailed in the paper.</p>
+            <p>This analysis details the potential and anticipation for the emergence of VF technology as a new tool for rangeland management. Ranchers have cited its 
+                environmental, ecological, and cost-saving aspects as having immense potential to benefit their operations. Although it shows great promise, as with many 
+                emerging technologies, there still remain concerns. For example, there have been cases where collars have fallen off cattle or otherwise failed due to
+                inclement weather or very rough topography. Another concern that has been raised is where VF will be feasible. Its implementation
+                requires a large up-front capital cost, posing a challenge to credit-constrained or otherwise smaller operations.</p>
+            <p><strong>NOTE: The content of this project is written by the following authors: Dana Hoag, Anthony G. Vorster, Krista Ehlert, Paul Evangelista, Lily Edwards-Callaway, Daniel F. Mooney, and Josh Virene.</strong></p>
+            <p>For a more in-depth treatment of the content of this writing, please refer to <a href="https://www.sciencedirect.com/science/article/pii/S1550742424000861">Beef Cattle Producer Perspectives on Virtual Fencing.</a></p>
+        </div>
+    </section>
+
+    <section id="code_samples" class="dropdown">
+        <h2 class="dropbtn">Code Samples</h2>
+        <div class="dropdown-content">
+            <section id="Python_Sample" class="dropdown">
+                <h3 class="dropbtn">Python Coding Sample</h3>
+                <div class="dropdown-content">
+                    <h4>This script analyzes the depth of wells across the Colorado, and illustrates the contrast in both water distribution and well depth between the eastern and western regions of the state.</h4>
+                    <iframe src="images/PyScript.html" width="100%" height="600px"></iframe>
+                </div>
+            </section>
+
+            <section id="R_Sample" class="dropdown">
+                <h3 class="dropbtn">R Sample</h3>
+                <div class="dropdown-content">
+                    <h4>This script replicates some of the principle returns to scale findings published in Nerlove (1955).</h4>
+                    <iframe src="images/JavaScript.pdf" width="100%" height="600px"></iframe>
+                </div>
+            </section>
+
+            <section id="JS_Sample" class="dropdown">
+                <h3 class="dropbtn">Remote Sensing Portfolio</h3>
+                <div class="dropdown-content">
+                    <h4>This is a portfolio of my remote sensing lab work; the JavaScript Code is included via Permalinks.</h4>
+                    <iframe src="images/JavaScript.pdf" width="100%" height="600px"></iframe>
+                </div>
+            </section>
+
+            <section id="STATA_Sample" class="dropdown">
+                <h3 class="dropbtn">STATA Sample</h3>
+                <div class="dropdown-content">
+                    <h4>There is no application for this; it is pure econometrics and includes concepts including demonstrating consistency and superconsistency.</h4>
+                    <iframe src="images/StataScript.pdf" width="100%" height="600px"></iframe>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    
+    <section id="experience" class="dropdown">
+        <h2 class="dropbtn">Experience</h2>
+        <div class="dropdown-content">
+            <ul>
+                <li><strong>Reader/Teaching Assistant, University of California, Davis </strong> - Assisted in teaching upper-division undergraduate economics courses.</li>
+                <li><strong>Student Researcher, National Aeronautical and Space Administration (NASA) </strong> - Conducted data analysis for environmental research projects.</li>
+                <li><strong>Survey Statistician Intern, United States Department of Agriculture (USDA), National Agricultural Statistics Service (NASS) </strong> - Analyzed survey data and prepared reports.</li>
+                <li><strong>Undergraduate Student Researcher, Colorado State University, Fort Collins, CO </strong> - Conducted surveys, developed methodology, and helped with writing for a journal article in the Journal of Rangeland Ecology and Management.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="education" class="dropdown">
+        <h2 class="dropbtn">Education</h2>
+        <div class="dropdown-content">
+            <p>M.S. Applied Economics, University of California, Davis (2024)</p>
+            <p>B.S. Applied Economics, Colorado State University (2023)</p>
+        </div>
+    </section>
+
+    <section id="skills" class="dropdown">
+        <h2 class="dropbtn">Skills</h2>
+        <div class="dropdown-content">
+            <ul>
+                <li><strong>Programming / Data Analysis Tools:</strong> Python, R, STATA, JavaScript, HTML, SQL</li>
+                <li><strong>GIS:</strong> ArcGIS Pro, ArcMap, Arcpy, GeoPandas, Pandas, Rasterio, GDAL, QGIS, Google Earth Engine</li>
+                <li>Data Analysis, Statistics, Econometrics, GIS Machine Learning, NLP</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: josh.virene@example.com</p>
+        <p>Cell: (720)-441-8570</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/josh-virene/" target="_blank">https://www.linkedin.com/in/josh-virene/</a></p>
+        <p>Github: <a href="https://github.com/joshvirene" target="_blank">https://github.com/joshvirene</a></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Josh Virene. All rights reserved.</p>
+    </footer>
+
+
