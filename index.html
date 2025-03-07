@@ -1,201 +1,1197 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Virene - Resume</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var dropdowns = document.querySelectorAll('.dropdown');
-        
-        dropdowns.forEach(function(dropdown) {
-            var btn = dropdown.querySelector('.dropbtn');
-            var content = dropdown.querySelector('.dropdown-content');
+    <title>Josh Virene - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.154.0/three.min.js"></script>
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-            btn.addEventListener('click', function() {
-                content.classList.toggle('show');
-            });
-
-            // Close dropdown if clicked outside
-            window.addEventListener('click', function(event) {
-                if (!dropdown.contains(event.target)) {
-                    content.classList.remove('show');
-                }
-            });
-        });
-    });
-</script>
-<body>
-    <header>
-        <h1>Josh Virene</h1>
-        <p>Applied Economist | Data Scientist</p>
-    </header>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my website, my name is Josh Virene, a recent graduate with a Master's in Applied Economics from the University of California, Davis.
-            This website showcases several of the projects that I have worked on, and showcases the applied work, as well as code that I have employed
-            in languages including R, Python, STATA, and JavaScript.</p>
-        </p>
-    </section>
-
-    <section id="projects_1" class="dropdown">
-        <h2 class="dropbtn">Satellite Imagery Analysis for Wildfire Management</h2>
-        <div class="dropdown-content">
-            <img src="images/fire_fighter.jpg" width="600" height="300">
-            <img src="images/fire_fighter_2.jpg" width="600" height="300">
-            <p>One of my works was done under the NASA DEVELOP program. Working in a team of four, we used aerial and satellite imagery to contribute to the 
-                literature and understanding of remote sensing as a tool for wildfire analysis in Colorado. This was done in the wake of the <a href="https://www.fs.usda.gov/about-agency/features/cameron-peak-fighting-fire-together">Cameron Peak Fire</a>, 
-                one of the most devastating fires in Colorado to date. Increasing frequency and severity of wildfires in the state of Colorado has necessitated improved forest monitoring and management practices. </p>    
-                
-            <p><strong>Objective:</strong>  The overarching goal of this project was to provide a product for our partner agencies- the Colorado State Forest Service (CSFS), 
-            and the Colorado Forest Restoration Institute (CFRI) with a workflow they could use to identify wildfire-prone regions in Colorado.</p>
-
-            <p><strong>Methods:</strong>  In order to achieve this, we developed a thorough and nuanced procedure for canopy classification for forests in Colorado.</p>
-            <p> Important steps in this process included: 
-            <ul>
-                <li> Gathering input imagery sources. We used National Agricultural Imagery Program (NAIP) imagery for our spectral imagery source, as well as Shuttle Radar Topography Mission (SRTM) imagery for topographic data.</li>
-                <li> Developing a classification method. The main method we employed was supervised classification through a random forest (RF) model using Google Earth Engine (GEE), which is written in JavaScript (JS).</li>
-                <li> Exploring means of improving model accuracy. Inherent to machine learning (ML) and random forest (RF) classification is model performance and its sensitivity to variable inputs; 
-                    one of the main components of our analysis was running over thirty model iterations to explore how we could improve our model.</li>
-                <li> We tested factors including image quality, image resolution, number of training points, the predictor variables used, and our method of dealing with shadow pixels.</li>
-                <li> Finally, the analysis was carried out in study regions characterized by different forest types. The first study region, Upper Monument Creek (UMC) is near Colorado Springs and the other study region- BDSR is in Northern Colorado. </li>
-            </ul>
-
-            <p>The full process is detailed as follows:</p>
-            <img src="images/process.png">
-
-            <p><strong>Conclusion:</strong>  Our conclusion section evaluated the efficacy of various approaches that we employed to deliver the best product to our partner agencies.</p>
-            <p> Important conclusions that we reached include: 
-            <ul>
-                <li> In comparing the 2013 (lower quality) to the 2021 (higher quality) NAIP imagery, varying the image quality had a minimal effect on model performance.</li>
-                <img src="images/result1.png">
-                <li> Varying the resolution of the imagery from the most coarse at 3m to the most granular at 1m, had minimal impact on model test accuracy.</li>
-                <img src="images/result5.png">
-                <li> There is a positive correlation between the number of training points and the model accuracy; more training points lead to more accurate classification.</li>
-                <img src="images/result4.png">
-                <li> Employing shadow reclassification methods will yield a better performing model compared to one that does not reclassify Shadow into either Gap or Canopy classes.</li>
-                <img src="images/result3.png">
-                <li> Including topographic variables from the SRTM decreased model performance, suggesting that the topographic data input into the RF model</li>
-            </ul>
-
-            <p><strong>Key Takeaways:</strong> Overall, this project contributes to the body of literature on remote sensing applications in wildfire management and 
-                mitigation. We draw important conclusions within our study on which model variables best optimize the model accuracy drawn from the confusion matrix
-                within the context of our study. Finally, we determined where future work could extend the work accomplished in this study. We recommend the exploration
-                of object-based classification methods, in addition to shadow classification being done in the post-processing stage rather than pre-processing.</p>  
+        :root {
+            /* Color scheme */
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #7209b7;
+            --bg-light: #f8f9fa;
+            --bg-dark: #212529;
+            --text-dark: #212529;
+            --text-light: #f8f9fa;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
             
-            <p><strong>NOTE: This work was done in conjunction with the following individuals:</strong></p>
-            <p><strong>Team: Nora Carmody, Lillian Gordon, Nathan Teich, Josh Virene</strong></p>
-            <p><strong>Science Advisors: Nick Young, Tony Vorster, Christopher Choi, Catherine Jarnevich</strong></p>
-            <p><strong>Fellow: Sarah Hettema</strong></p>
-            For a more extensive treatment of the research described here, please visit <a href="https://appliedsciences.nasa.gov/what-we-do/projects/evaluating-efficacy-remote-sensing-imagery-monitoring-forest-fuels-treatment"> the NASA DEVELOP website.</a>
-        </div>
-    </section>  
+            /* Typography */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
 
-    <section id="projects_2" class="dropdown">
-        <h2 class="dropbtn">Beef Cattle Producer Perspectives on Virtual Fencing</h2>
-        <div class="dropdown-content">
-            <img src="images/vf.jpg" height="600" width="500">
-            <p>Another project that I worked on examines technology diffusion for an emerging global positioning technology in the rural United States. Virtual Fence (VF) technology is a rapidly expanding means of maintaining boundaries
-                for livestock without the need for physical fence. This is achieved using a tower that broadcasts a signal to collars, which give audible and electric cues that serve as an invisible boundary for livestock, namely cattle 
-                in the context of this study.</p>
-            <p><strong>Stage One, Conducting the Interviews:</strong> In this stage, using a document with pre-specified interview questions, I conducted and recorded interviews 
-                with ranchers from Colorado, South Dakota, Montana, Washington, and Utah.</p>
-            <p><strong>Stage Two, Analysis:</strong> The next step was to transcribe the recordings using Google Cloud Platform (GCP). Once transcribed, I conducted 
-                a two-stage coding process to parse out common themes, the pros and cons of the technology, and any concerns that ranchers raised. Going beyond what
-                was described in the paper, I explored other natural language processing (NLP) methods in R and made word clouds for more meta-level analysis.</p>
-            <p><strong>Stage Three, Writing:</strong> Based on the results from the analysis, myself and the other writers drew conclusions that are detailed in the paper.</p>
-            <p>This analysis details the potential and anticipation for the emergence of VF technology as a new tool for rangeland management. Ranchers have cited its 
-                environmental, ecological, and cost-saving aspects as having immense potential to benefit their operations. Although it shows great promise, as with many 
-                emerging technologies, there still remain concerns. For example, there have been cases where collars have fallen off cattle or otherwise failed due to
-                inclement weather or very rough topography. Another concern that has been raised is where VF will be feasible. Its implementation
-                requires a large up-front capital cost, posing a challenge to credit-constrained or otherwise smaller operations.</p>
-            <p><strong>NOTE: The content of this project is written by the following authors: Dana Hoag, Anthony G. Vorster, Krista Ehlert, Paul Evangelista, Lily Edwards-Callaway, Daniel F. Mooney, and Josh Virene.</strong></p>
-            <p>For a more in-depth treatment of the content of this writing, please refer to <a href="https://www.sciencedirect.com/science/article/pii/S1550742424000861">Beef Cattle Producer Perspectives on Virtual Fencing.</a></p>
+            /* Animation */
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                --transition-fast: 0s;
+                --transition-medium: 0s;
+                --transition-slow: 0s;
+            }
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background gradient animation */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(245, 247, 250, 0.8), rgba(230, 239, 252, 0.8));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-dark);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: var(--spacing-md);
+        }
+
+        li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        a:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        a.inline-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-dark);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        a.inline-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        section {
+            padding: var(--spacing-xxl) 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .two-columns {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .three-columns {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 992px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== COMPONENTS ===== */
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: var(--spacing-md) 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-medium);
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 4px;
+            transition: background-color var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-dark);
+            border-radius: 3px;
+            transition: all var(--transition-fast);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: var(--spacing-md) 0;
+                gap: var(--spacing-md);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform var(--transition-medium), opacity var(--transition-medium);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(90deg, var(--primary-dark), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xl);
+            color: var(--text-muted);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Three.js canvas container */
+        #scene-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Section headers with animated underline */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width var(--transition-medium);
+        }
+
+        section.visible .section-title::after {
+            width: 100%;
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: var(--spacing-lg);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-dark);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Project Sections */
+        .project-section {
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .project-header {
+            cursor: pointer;
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color var(--transition-fast);
+        }
+
+        .project-header:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .project-header h3 {
+            margin-bottom: 0;
+        }
+
+        .project-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-slow);
+            padding: 0 var(--spacing-md);
+        }
+
+        .project-content.active {
+            max-height: 5000px;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            background-color: white;
+        }
+
+        .project-toggle {
+            transition: transform var(--transition-fast);
+        }
+
+        .project-toggle.active {
+            transform: rotate(180deg);
+        }
+
+        /* Code samples */
+        .code-sample {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .code-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: 8px 8px 0 0;
+            font-family: monospace;
+        }
+
+        .code-content {
+            background-color: #f8f9fa;
+            padding: var(--spacing-md);
+            border-radius: 0 0 8px 8px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            overflow: auto;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: var(--spacing-md);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto var(--spacing-sm);
+        }
+
+        /* Experience timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            left: 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        section.visible .timeline-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        section.visible .timeline-item:nth-child(even) {
+            transition-delay: 0.2s;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 3px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(50px);
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: var(--spacing-md);
+            background-color: white;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 10px;
+                left: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after,
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+        }
+
+        /* Contact section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.visible .contact-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section.visible .contact-item:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        section.visible .contact-item:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        section.visible .contact-item:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary-light);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium), background-color var(--transition-fast);
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mb-1 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mb-2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mb-3 {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .mb-5 {
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        /* Fade in animation for all images */
+        img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Iframe container */
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 8px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background Scene Container -->
+    <div id="scene-container"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">JV</a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#code" class="nav-link">Code</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero visible">
+        <div class="container hero-content">
+            <h1 class="hero-title">Josh Virene</h1>
+            <p class="hero-subtitle">Applied Economist | Data Scientist</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
         </div>
     </section>
 
-    <section id="code_samples" class="dropdown">
-        <h2 class="dropbtn">Code Samples</h2>
-        <div class="dropdown-content">
-            <section id="Python_Sample" class="dropdown">
-                <h3 class="dropbtn">Python Coding Sample</h3>
-                <div class="dropdown-content">
-                    <h4>This script analyzes the depth of wells across the Colorado, and illustrates the contrast in both water distribution and well depth between the eastern and western regions of the state.</h4>
-                    <iframe src="images/PyScript.html" width="100%" height="600px"></iframe>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="grid two-columns">
+                <div>
+                    <p>Welcome to my website! I'm Josh Virene, a recent graduate with a Master's in Applied Economics from the University of California, Davis. This portfolio showcases several of the projects I've worked on, featuring applied work and code in languages including R, Python, STATA, and JavaScript.</p>
+                    <p>With a background in both economics and data science, I specialize in applying analytical methods to solve real-world problems. My experience spans environmental research, agricultural statistics, and remote sensing applications.</p>
                 </div>
-            </section>
+                <div>
+                    <!-- Placeholder image -->
+                    <svg class="card-img" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="800" height="500" fill="#f0f4f8"/>
+                        <circle cx="400" cy="250" r="150" fill="#4361ee" opacity="0.2"/>
+                        <path d="M200,250 Q400,100 600,250 T1000,250" stroke="#4361ee" stroke-width="5" fill="none"/>
+                        <circle cx="400" cy="250" r="50" fill="#4361ee" opacity="0.5"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <section id="R_Sample" class="dropdown">
-                <h3 class="dropbtn">R Sample</h3>
-                <div class="dropdown-content">
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Project 1 -->
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>Satellite Imagery Analysis for Wildfire Management</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <div class="grid two-columns">
+                        <div>
+                            <img src="images/fire_fighter.jpg" alt="Wildfire management" class="project-img" data-src="images/fire_fighter.jpg" width="600" height="300">
+                        </div>
+                        <div>
+                            <img src="images/fire_fighter_2.jpg" alt="Wildfire management" class="project-img" data-src="images/fire_fighter_2.jpg" width="600" height="300">
+                        </div>
+                    </div>
+                    
+                    <p>One of my works was done under the NASA DEVELOP program. Working in a team of four, we used aerial and satellite imagery to contribute to the literature and understanding of remote sensing as a tool for wildfire analysis in Colorado. This was done in the wake of the <a href="https://www.fs.usda.gov/about-agency/features/cameron-peak-fighting-fire-together" class="inline-link">Cameron Peak Fire</a>, one of the most devastating fires in Colorado to date. Increasing frequency and severity of wildfires in the state of Colorado has necessitated improved forest monitoring and management practices.</p>    
+                    
+                    <p><strong>Objective:</strong> The overarching goal of this project was to provide a product for our partner agencies - the Colorado State Forest Service (CSFS), and the Colorado Forest Restoration Institute (CFRI) with a workflow they could use to identify wildfire-prone regions in Colorado.</p>
+
+                    <p><strong>Methods:</strong> In order to achieve this, we developed a thorough and nuanced procedure for canopy classification for forests in Colorado.</p>
+                    <p>Important steps in this process included:</p>
+                    <ul>
+                        <li>Gathering input imagery sources. We used National Agricultural Imagery Program (NAIP) imagery for our spectral imagery source, as well as Shuttle Radar Topography Mission (SRTM) imagery for topographic data.</li>
+                        <li>Developing a classification method. The main method we employed was supervised classification through a random forest (RF) model using Google Earth Engine (GEE), which is written in JavaScript (JS).</li>
+                        <li>Exploring means of improving model accuracy. Inherent to machine learning (ML) and random forest (RF) classification is model performance and its sensitivity to variable inputs; one of the main components of our analysis was running over thirty model iterations to explore how we could improve our model.</li>
+                        <li>We tested factors including image quality, image resolution, number of training points, the predictor variables used, and our method of dealing with shadow pixels.</li>
+                        <li>Finally, the analysis was carried out in study regions characterized by different forest types. The first study region, Upper Monument Creek (UMC) is near Colorado Springs and the other study region- BDSR is in Northern Colorado.</li>
+                    </ul>
+
+                    <p>The full process is detailed as follows:</p>
+                    <img src="images/process.png" alt="Process diagram" class="project-img" data-src="images/process.png">
+
+                    <p><strong>Conclusion:</strong> Our conclusion section evaluated the efficacy of various approaches that we employed to deliver the best product to our partner agencies.</p>
+                    <p>Important conclusions that we reached include:</p>
+                    <ul
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Head content is included in previous section -->
+</head>
+<body>
+    <!-- Previous sections (navbar, hero, about, start of projects) are included in previous section -->
+
+    <!-- Continuing Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Project 1 (continuing) -->
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>Satellite Imagery Analysis for Wildfire Management</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <!-- Previous project content is included in previous section -->
+                    
+                    <ul>
+                        <li>In comparing the 2013 (lower quality) to the 2021 (higher quality) NAIP imagery, varying the image quality had a minimal effect on model performance.</li>
+                        <img src="images/result1.png" alt="Analysis result" class="project-img" data-src="images/result1.png">
+                        <li>Varying the resolution of the imagery from the most coarse at 3m to the most granular at 1m, had minimal impact on model test accuracy.</li>
+                        <img src="images/result5.png" alt="Analysis result" class="project-img" data-src="images/result5.png">
+                        <li>There is a positive correlation between the number of training points and the model accuracy; more training points lead to more accurate classification.</li>
+                        <img src="images/result4.png" alt="Analysis result" class="project-img" data-src="images/result4.png">
+                        <li>Employing shadow reclassification methods will yield a better performing model compared to one that does not reclassify Shadow into either Gap or Canopy classes.</li>
+                        <img src="images/result3.png" alt="Analysis result" class="project-img" data-src="images/result3.png">
+                        <li>Including topographic variables from the SRTM decreased model performance, suggesting that the topographic data input into the RF model was not beneficial.</li>
+                    </ul>
+
+                    <p><strong>Key Takeaways:</strong> Overall, this project contributes to the body of literature on remote sensing applications in wildfire management and mitigation. We draw important conclusions within our study on which model variables best optimize the model accuracy drawn from the confusion matrix within the context of our study. Finally, we determined where future work could extend the work accomplished in this study. We recommend the exploration of object-based classification methods, in addition to shadow classification being done in the post-processing stage rather than pre-processing.</p>  
+                    
+                    <p><strong>NOTE: This work was done in conjunction with the following individuals:</strong></p>
+                    <p><strong>Team: Nora Carmody, Lillian Gordon, Nathan Teich, Josh Virene</strong></p>
+                    <p><strong>Science Advisors: Nick Young, Tony Vorster, Christopher Choi, Catherine Jarnevich</strong></p>
+                    <p><strong>Fellow: Sarah Hettema</strong></p>
+                    <p>For a more extensive treatment of the research described here, please visit <a href="https://appliedsciences.nasa.gov/what-we-do/projects/evaluating-efficacy-remote-sensing-imagery-monitoring-forest-fuels-treatment" class="inline-link">the NASA DEVELOP website.</a></p>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>Beef Cattle Producer Perspectives on Virtual Fencing</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <div class="text-center mb-4">
+                        <img src="images/vf.jpg" alt="Virtual Fencing" class="project-img" data-src="images/vf.jpg" height="600" width="500">
+                    </div>
+                    
+                    <p>Another project that I worked on examines technology diffusion for an emerging global positioning technology in the rural United States. Virtual Fence (VF) technology is a rapidly expanding means of maintaining boundaries for livestock without the need for physical fence. This is achieved using a tower that broadcasts a signal to collars, which give audible and electric cues that serve as an invisible boundary for livestock, namely cattle in the context of this study.</p>
+                    
+                    <p><strong>Stage One, Conducting the Interviews:</strong> In this stage, using a document with pre-specified interview questions, I conducted and recorded interviews with ranchers from Colorado, South Dakota, Montana, Washington, and Utah.</p>
+                    
+                    <p><strong>Stage Two, Analysis:</strong> The next step was to transcribe the recordings using Google Cloud Platform (GCP). Once transcribed, I conducted a two-stage coding process to parse out common themes, the pros and cons of the technology, and any concerns that ranchers raised. Going beyond what was described in the paper, I explored other natural language processing (NLP) methods in R and made word clouds for more meta-level analysis.</p>
+                    
+                    <p><strong>Stage Three, Writing:</strong> Based on the results from the analysis, myself and the other writers drew conclusions that are detailed in the paper.</p>
+                    
+                    <p>This analysis details the potential and anticipation for the emergence of VF technology as a new tool for rangeland management. Ranchers have cited its environmental, ecological, and cost-saving aspects as having immense potential to benefit their operations. Although it shows great promise, as with many emerging technologies, there still remain concerns. For example, there have been cases where collars have fallen off cattle or otherwise failed due to inclement weather or very rough topography. Another concern that has been raised is where VF will be feasible. Its implementation requires a large up-front capital cost, posing a challenge to credit-constrained or otherwise smaller operations.</p>
+                    
+                    <p><strong>NOTE: The content of this project is written by the following authors: Dana Hoag, Anthony G. Vorster, Krista Ehlert, Paul Evangelista, Lily Edwards-Callaway, Daniel F. Mooney, and Josh Virene.</strong></p>
+                    
+                    <p>For a more in-depth treatment of the content of this writing, please refer to <a href="https://www.sciencedirect.com/science/article/pii/S1550742424000861" class="inline-link">Beef Cattle Producer Perspectives on Virtual Fencing.</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Samples Section -->
+    <section id="code" class="code-samples">
+        <div class="container">
+            <h2 class="section-title">Code Samples</h2>
+            
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>Python Coding Sample</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <h4>This script analyzes the depth of wells across Colorado, and illustrates the contrast in both water distribution and well depth between the eastern and western regions of the state.</h4>
+                    <div class="iframe-container">
+                        <iframe src="images/PyScript.html" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>R Sample</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
                     <h4>This script replicates some of the principle returns to scale findings published in Nerlove (1955).</h4>
-                    <iframe src="images/RScript.pdf" width="100%" height="600px"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="images/RScript.pdf" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
-            </section>
-
-            <section id="JS_Sample" class="dropdown">
-                <h3 class="dropbtn">Remote Sensing Portfolio</h3>
-                <div class="dropdown-content">
+            </div>
+            
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>Remote Sensing Portfolio</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
                     <h4>This is a portfolio of my remote sensing lab work; the JavaScript Code is included via Permalinks.</h4>
-                    <iframe src="images/JavaScript.pdf" width="100%" height="600px"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="images/JavaScript.pdf" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
-            </section>
-
-            <section id="STATA_Sample" class="dropdown">
-                <h3 class="dropbtn">STATA Sample</h3>
-                <div class="dropdown-content">
+            </div>
+            
+            <div class="project-section">
+                <div class="project-header">
+                    <h3>STATA Sample</h3>
+                    <svg class="project-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10" stroke="#4361ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="project-content">
                     <h4>There is no application for this; it is pure econometrics and includes concepts including demonstrating consistency and superconsistency.</h4>
-                    <iframe src="images/StataScript.pdf" width="100%" height="600px"></iframe>
+                    <div class="iframe-container">
+                        <iframe src="images/StataScript.pdf" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
     </section>
 
-    
-    <section id="experience" class="dropdown">
-        <h2 class="dropbtn">Experience</h2>
-        <div class="dropdown-content">
-            <ul>
-                <li><strong>Reader/Teaching Assistant, University of California, Davis </strong> - Assisted in teaching upper-division undergraduate economics courses.</li>
-                <li><strong>Student Researcher, National Aeronautical and Space Administration (NASA) </strong> - Conducted data analysis for environmental research projects.</li>
-                <li><strong>Survey Statistician Intern, United States Department of Agriculture (USDA), National Agricultural Statistics Service (NASS) </strong> - Analyzed survey data and prepared reports.</li>
-                <li><strong>Undergraduate Student Researcher, Colorado State University, Fort Collins, CO </strong> - Conducted surveys, developed methodology, and helped with writing for a journal article in the Journal of Rangeland Ecology and Management.</li>
-            </ul>
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Reader/Teaching Assistant</h3>
+                        <p>University of California, Davis</p>
+                        <p>Assisted in teaching upper-division undergraduate economics courses. Provided support to professors and students through grading, office hours, and exam preparation.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Student Researcher</h3>
+                        <p>National Aeronautical and Space Administration (NASA)</p>
+                        <p>Conducted data analysis for environmental research projects. Utilized satellite imagery and advanced analytical techniques to contribute to wildfire management research.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Survey Statistician Intern</h3>
+                        <p>United States Department of Agriculture (USDA), National Agricultural Statistics Service (NASS)</p>
+                        <p>Analyzed survey data and prepared reports. Applied statistical methods to agricultural data sets to derive insights for government decision-making.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Undergraduate Student Researcher</h3>
+                        <p>Colorado State University, Fort Collins, CO</p>
+                        <p>Conducted surveys, developed methodology, and helped with writing for a journal article in the Journal of Rangeland Ecology and Management. Studied emerging technologies in agricultural management.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid two-columns mt-5">
+                <div>
+                    <h3>Education</h3>
+                    <div class="card">
+                        <div class="card-content">
+                            <h4>M.S. Applied Economics</h4>
+                            <p>University of California, Davis (2024)</p>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-content">
+                            <h4>B.S. Applied Economics</h4>
+                            <p>Colorado State University (2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="education" class="dropdown">
-        <h2 class="dropbtn">Education</h2>
-        <div class="dropdown-content">
-            <p>M.S. Applied Economics, University of California, Davis (2024)</p>
-            <p>B.S. Applied Economics, Colorado State University (2023)</p>
-        </div>
-    </section>
-
-    <section id="skills" class="dropdown">
-        <h2 class="dropbtn">Skills</h2>
-        <div class="dropdown-content">
-            <ul>
-                <li><strong>Programming / Data Analysis Tools:</strong> Python, R, STATA, JavaScript, HTML, SQL</li>
-                <li><strong>GIS:</strong> ArcGIS Pro, ArcMap, Arcpy, GeoPandas, Pandas, Rasterio, GDAL, QGIS, Google Earth Engine</li>
-                <li>Data Analysis, Statistics, Econometrics, GIS Machine Learning, NLP</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: josh.virene@gmail.com</p>
-        <p>Cell: (720)-441-8570</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/josh-virene/" target="_blank">https://www.linkedin.com/in/josh-virene/</a></p>
-        <p>Github: <a href="https://github.com/joshvirene" target="_blank">https://github.com/joshvirene</a></p>
-    </section>
-    
-    <footer>
-        <p>&copy; 2024 Josh Virene. All rights reserved.</p>
-    </footer>
-
-
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            
+            <div class="mb-5">
+                <h3>Programming / Data Analysis Tools</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z" fill="#3776AB"/>
+                        </svg>
+                        <p>Python</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 18.8c-3.4 0-6.8-.9-6.8-5 0-1.2 0-2.4.7-3.3.1-.1.1-.2.2-.3.2-.7-.1-1.1-.4-1.6l-.2-.2c-.1-.1-.2-.3-.1-.4.1-.2.2-.2.3-.2h.2c.8 0 1.6.6 2 .9.5.4.8.5 1.5.7.4.1.8.2 1.3.2.8 0 1.6-.3 2.4-.3s1.6.3 2.4.3c.4 0 .9-.1 1.3-.2.6-.2 1-.2 1.5-.7.4-.3 1.2-.9 2-.9h.2c.1 0 .2 0 .3.2.1.1.1.3-.1.4l-.2.2c-.3.5-.5.8-.4 1.6.1.1.1.2.3.3.6.9.7 2.1.7 3.3-.1 4.1-3.4 5-6.8 5zm-1-7.7c-1.1 0-1.9.8-1.9 2.8s.8 2.8 1.9 2.8c1.1 0 1.9-.8 1.9-2.8 0-2-1-2.8-1.9-2.8zm-5.3-4.4c-.2 0-.4.1-.6.1.2-.6.7-1.1 1.2-1.5.4-.4 1-.7 1.6-.9.6-.2 1.2-.3 1.8-.3h1c.6 0 1.2.1 1.8.3.6.2 1.2.6 1.6.9s.9.9 1.2 1.5c-.3-.1-.4-.1-.6-.1-1.1-.1-1.8.7-2.4 1.2-.3.3-.6.5-1.1.6-.4.1-.9.2-1.3.2-.8 0-1.6-.3-2.4-.3s-1.6.3-2.4.3c-.4 0-.9-.1-1.3-.2-.4-.1-.8-.4-1.1-.6-.6-.5-1.3-1.3-2.4-1.2h-.6z" fill="#1fa3ec"/>
+                        </svg>
+                        <p>R</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3h18v18H3V3zm9.5 15.5H16V16h-3.5v2.5zm0-4.75H16v-2.5h-3.5v2.5zm0-4.75H16V6.5h-3.5V9zM8 11.25h3.5v-2.5H8v2.5zm0 4.75h3.5v-2.5H8V16z" fill="#3776AB"/>
+                        </svg>
+                        <p>STATA</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#F7DF1E"/>
+                        </svg>
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181" fill="#DB7093"/>
+                        </svg>
+                        <p>HTML</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.044 23.27l-5.044-17.099v-.001c-.198-.577-.745-.944-1.301-.9h-2.023c-.552 0-1.13.321-1.292.9L4.22 23.27c-.108.33.124.73.483.73h2.023c.545 0 1.178-.321 1.292-.73l1.055-3.438h5.119l1.179 3.438c.115.41.784.73 1.332.73h2.023c.361 0 .591-.401.483-.73M9.4 17.109l1.738-5.42h.172l1.9 5.42H9.4" fill="#4479A1"/>
+                        </svg>
+                        <p>SQL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-5">
+                <h3>GIS & Remote Sensing</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.2 9.2L12 7l-2.3 6.7 2.5 5.1 2.5-5.1L12.2 9.2M5.8 19l2.9-8.3L6.9 8l-4.5 9.1h10.4l.1-.2H5.8m12.5 0l4.5-9.1-1.8-2.7-2.9 8.3L21.8 19" fill="#3FA0D6"/>
+                        </svg>
+                        <p>ArcGIS Pro</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.2 9.2L12 7l-2.3 6.7 2.5 5.1 2.5-5.1L12.2 9.2M5.8 19l2.9-8.3L6.9 8l-4.5 9.1h10.4l.1-.2H5.8m12.5 0l4.5-9.1-1.8-2.7-2.9 8.3L21.8 19" fill="#589632"/>
+                        </svg>
+                        <p>QGIS</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.5 0l-.866.5v1l.866.5.866-.5v-1L10.5 0zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm-15.588 0l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm-15.588 0l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm-10.392 0l-.866.5v1l.866.5.866-.5v-1l-.866-.5zm2.598 1.5l-.866.5v1l.866.5.866-.5v-1l-.866-.5z" fill="#4285F4"/>
+                        </svg>
+                        <p>Google Earth Engine</p>
+                    </div>
+                    <div class="skill-item">
+                        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17
