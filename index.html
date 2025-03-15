@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Josh Virene - Economist</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -653,35 +652,6 @@
             container.innerHTML = '<p style="padding: 20px; color: red;">Error loading PDF. Please check the file path.</p>';
         };
     }
-
-    // Addressing PDF loading issues on IOS; we use PDF.js
-    document.addEventListener("DOMContentLoaded", function() {
-        var pdfContainers = document.querySelectorAll(".pdf-container");
-
-        pdfContainers.forEach(function(container) {
-            var pdfUrl = container.getAttribute("data-pdf");
-            var canvas = document.createElement("canvas");
-            container.appendChild(canvas);
-            var context = canvas.getContext("2d");
-
-            pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-                pdf.getPage(1).then(function(page) {
-                    var scale = 1.5;
-                    var viewport = page.getViewport({ scale: scale });
-
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-
-                    var renderContext = {
-                        canvasContext: context,
-                        viewport: viewport,
-                    };
-                    page.render(renderContext);
-                });
-            });
-        });
-    });
-
 });
     </script>
 
