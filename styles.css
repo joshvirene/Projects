@@ -20,7 +20,6 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     background-color: var(--light-bg);
-    padding-top: 50px; /* Height of the nav bar */
 }
 
 a {
@@ -93,38 +92,20 @@ header {
 nav {
     background-color: white;
     box-shadow: var(--card-shadow);
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out;
+    z-index: 100;
 }
 
 .nav-container {
     display: flex;
     justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    justify-content: center;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.nav-links::-webkit-scrollbar {
-    display: none;
 }
 
 .nav-links li a {
@@ -133,7 +114,6 @@ nav {
     color: var(--primary-color);
     font-weight: 500;
     white-space: nowrap;
-    transition: var(--transition);
 }
 
 .nav-links li a:hover,
@@ -144,14 +124,6 @@ nav {
 
 section {
     padding: 60px 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 section h2 {
@@ -249,7 +221,7 @@ section h2::after {
 .experience-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease;
 }
 
 .experience-content.active {
@@ -291,15 +263,11 @@ section h2::after {
 
 .publication-content {
     display: auto;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-out;
 }
 
 /* When active (toggled), show the content */
 .publication-content.active {
     display: block;
-    max-height: var(--content-height);
 }
 
 
@@ -343,14 +311,11 @@ section h2::after {
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     margin-top: 10px; 
-    transform-origin: top;
-    transform: scaleY(0);
-    transition: transform 0.2s ease;
 }
 
 /* Show the content when active */
-.dropdown-content.show {
-    transform: scaleY(1);
+.dropdown-content.active {
+    display: block; 
 }
 
 .publication-content.active + .publication-toggle i {
@@ -434,8 +399,6 @@ section h2::after {
     transition: var(--transition);
     font-weight: 500;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
 .language-tab:hover {
@@ -448,33 +411,14 @@ section h2::after {
     color: var(--secondary-color);
 }
 
-.language-tab::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--secondary-color);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-}
-
-.language-tab.active::after {
-    transform: translateX(0);
-}
-
 /* Important: These styles control the visibility of tabs */
 .code-content {
     display: none;
     padding: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .code-content.active {
     display: block;
-    opacity: 1;
 }
 
 /* Dropdown menu styles - integrated with your existing dropdown styles */
@@ -573,115 +517,6 @@ footer {
     padding: 30px 0;
 }
 
-/* Optimized animations and transitions */
-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.nav-hidden {
-    transform: translateY(-100%);
-}
-
-.experience-content {
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-.publication-content {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-out;
-}
-
-.publication-content.active {
-    max-height: var(--content-height);
-}
-
-.dropdown-content {
-    transform-origin: top;
-    transform: scaleY(0);
-    transition: transform 0.2s ease;
-}
-
-.dropdown-content.show {
-    transform: scaleY(1);
-}
-
-.language-tab {
-    position: relative;
-    overflow: hidden;
-}
-
-.language-tab::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--secondary-color);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-}
-
-.language-tab.active::after {
-    transform: translateX(0);
-}
-
-.code-content {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.code-content.active {
-    opacity: 1;
-}
-
-.pdf-error {
-    padding: 20px;
-    color: #dc3545;
-    text-align: center;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    margin: 10px 0;
-}
-
-/* Optimize performance with hardware acceleration */
-.experience-toggle i,
-.publication-toggle i,
-.dropdown-content,
-.language-tab,
-nav,
-section {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
-/* Smooth scrolling for the entire page */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Responsive optimizations */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
 
 @media (max-width: 768px) {
     .header-content h1 {
@@ -694,8 +529,6 @@ html {
     
     section {
         padding: 40px 0;
-        transform: none;
-        opacity: 1;
     }
     
     .contact-links {
@@ -716,23 +549,6 @@ html {
     .responsive-img {
         max-width: 100%;
         height: auto;
-    }
-
-    .experience-content,
-    .publication-content {
-        transition-duration: 0.2s;
-    }
-
-    body {
-        padding-top: 45px; /* Slightly smaller on mobile */
-    }
-    
-    .nav-links {
-        justify-content: flex-start; /* Allow scrolling on mobile */
-    }
-    
-    .nav-links li a {
-        padding: 12px 15px;
     }
 }
 
@@ -763,3 +579,7 @@ html {
         max-width: 100%; /* Ensure images fit on small screens */
     }
 }
+
+
+
+
